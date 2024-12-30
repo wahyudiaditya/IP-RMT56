@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import googleLogo from "../../../public/img/google.svg";
 import { useEffect } from "react";
 import { myRecMovie } from "../../../helpers/http-client";
 import { swalSuccess } from "../../../helpers/swallToast";
