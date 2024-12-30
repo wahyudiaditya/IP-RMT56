@@ -50,7 +50,7 @@ export default function AuthForm({
         <p className="text-center">OR</p>
         <hr className="border-gray-400" />
       </div>
-      <div className="pt-2 md:pb-10 flex justify-center">
+      <div className="pt-4 md:pb-10 flex justify-center">
         <p className="flex items-center gap-1 text-sm md:text-xl md:font-semibold">
           <img src={googleLogo} alt="google logo" className="w-6 md:w-10" />
           oogle
