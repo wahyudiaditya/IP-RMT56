@@ -1,5 +1,9 @@
 import PropTypes from "prop-types";
 import googleLogo from "../../../public/img/google.svg";
+import { useEffect } from "react";
+import { myRecMovie } from "../../../helpers/http-client";
+import { swalSuccess } from "../../../helpers/swallToast";
+import { useNavigate } from "react-router";
 
 export default function AuthForm({
   formType,
@@ -9,6 +13,45 @@ export default function AuthForm({
   spanNeedRegister,
   buttonSubmit,
 }) {
+  const navigate = useNavigate();
+  async function handleCredentialResponse(response) {
+    try {
+      const { data } = await myRecMovie.post("auths/login/google", {
+        clientToken: response.credential,
+      });
+      localStorage.setItem("access_token", data.access_token);
+      swalSuccess("Login Successfully");
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    const initializeGoogleSignInButton = () => {
+      const buttonSize = window.innerWidth < 600 ? "small" : "large";
+
+      google.accounts.id.renderButton(document.getElementById("buttonDiv"), {
+        theme: "outline",
+        size: buttonSize,
+      });
+    };
+
+    google.accounts.id.initialize({
+      client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
+      callback: handleCredentialResponse,
+    });
+
+    initializeGoogleSignInButton();
+
+    google.accounts.id.prompt();
+
+    window.addEventListener("resize", initializeGoogleSignInButton);
+
+    return () => {
+      window.removeEventListener("resize", initializeGoogleSignInButton);
+    };
+  }, []);
   return (
     <div>
       <div className="flex justify-center">
@@ -50,11 +93,8 @@ export default function AuthForm({
         <p className="text-center">OR</p>
         <hr className="border-gray-400" />
       </div>
-      <div className="pt-4 md:pb-10 flex justify-center">
-        <p className="flex items-center gap-1 text-sm md:text-xl md:font-semibold">
-          <img src={googleLogo} alt="google logo" className="w-6 md:w-10" />
-          oogle
-        </p>
+      <div className="pt-4 md:pb-10 flex justify-center font-normal">
+        <div id="buttonDiv"></div>
       </div>
     </div>
   );

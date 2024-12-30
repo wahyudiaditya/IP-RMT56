@@ -4,6 +4,6 @@ const authRouter = require("express").Router();
 
 authRouter.post("/login", AuthController.login);
 authRouter.post("/register", AuthController.register);
-authRouter.post("/google/callback", AuthController.googleLogin);
+authRouter.post("/login/google", AuthController.googleLogin);
 
 module.exports = authRouter;

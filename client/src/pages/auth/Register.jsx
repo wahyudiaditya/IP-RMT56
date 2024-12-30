@@ -1,10 +1,10 @@
-import Swal from "sweetalert2";
 import { myRecMovie } from "../../../helpers/http-client";
 import { NavLink, useNavigate } from "react-router";
 import { useState } from "react";
 import Button from "../../components/ui/Button";
 import InputForm from "../../components/ui/InputForm";
 import AuthForm from "../../components/form/AuthForm";
+import { swalError, swalSuccess } from "../../../helpers/swallToast";
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -15,7 +15,7 @@ export default function Register() {
     e.preventDefault();
 
     try {
-      await myRecMovie.post("/register", {
+      await myRecMovie.post("auths/register", {
         email,
         password,
       });
@@ -23,41 +23,14 @@ export default function Register() {
       setEmail("");
       setPassword("");
 
-      const Toast = Swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.onmouseenter = Swal.stopTimer;
-          toast.onmouseleave = Swal.resumeTimer;
-        },
-      });
-      Toast.fire({
-        icon: "success",
-        title: "Register Successfully",
-      });
+      swalSuccess("Register Successfully");
       navigate("/login");
     } catch (error) {
       console.log(error);
-      const Toast = Swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.onmouseenter = Swal.stopTimer;
-          toast.onmouseleave = Swal.resumeTimer;
-        },
-      });
-      Toast.fire({
-        icon: "error",
-        title: error.response.data.message,
-      });
+      swalError(error.response.data.message);
     }
   };
+
   return (
     <div>
       <div className="flex min-h-screen bg-gray-200 max-w-full items-center justify-center">

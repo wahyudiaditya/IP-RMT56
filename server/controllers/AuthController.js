@@ -54,10 +54,10 @@ class AuthController {
   static async googleLogin(req, res, next) {
     try {
       const client = new OAuth2Client(process.env.CLIENT_ID);
-      const { clientId } = req.body;
+      const { clientToken } = req.body;
 
       const ticket = await client.verifyIdToken({
-        idToken: clientId,
+        idToken: clientToken,
         audience: process.env.CLIENT_ID,
       });
 
