@@ -1,7 +1,13 @@
+import { BrowserRouter, Route, Routes } from "react-router";
+
 function App() {
   return (
     <>
-      <div className="text-2xl">hello ini test tailwind</div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
