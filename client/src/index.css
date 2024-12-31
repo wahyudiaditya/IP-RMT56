@@ -5,6 +5,14 @@
 body {
   font-family: "Josefin Sans", serif;
 }
+
+.homepage-banner {
+  background-image: url("/img/homepage-unsplash.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 62vh;
+}
 /* Ensure SweetAlert2 is responsive */
 .swal2-popup {
   width: 100% !important;

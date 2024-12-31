@@ -1,27 +1,71 @@
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
+import { swalError, swalSuccess } from "../../../helpers/swallToast";
 
 export default function HomeNavbar() {
+  const navigate = useNavigate();
+  function handleLogout() {
+    try {
+      localStorage.removeItem("access_token");
+      navigate("/login");
+      swalSuccess("Logout Successfully");
+    } catch (error) {
+      console.log(error);
+      swalError(error.response.data.message);
+    }
+  }
   return (
     <>
-      <div className="h-[87px] bg-white text-black border-b border-gray-200">
+      <div className="h-[87px] bg-sky-950 text-white border-b border-gray-200">
         <div className="flex items-center h-full container mx-auto font-semibold">
           <div className="text-4xl font-bold text-green-500">
-            <h1>MyRecMovie</h1>
+            <NavLink to="/">MyRecMovie</NavLink>
           </div>
-          <div className="hover:border-b-2 hover:border-green-500 mx-5 ms-20">
-            <NavLink to="/">Home</NavLink>
+          <div>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                `hover:border-b-2 hover:border-green-500 mx-5 ms-20 ${
+                  isActive ? "text-green-500" : "text-white"
+                }`
+              }
+            >
+              Home
+            </NavLink>
           </div>
-          <div className="hover:border-b-2 hover:border-green-500 mx-5 me-auto">
-            <NavLink to="/">Movie Recommendations</NavLink>
+          <div className="me-auto mx-5">
+            <NavLink
+              to="/recomendations"
+              className={({ isActive }) =>
+                `hover:border-b-2 hover:border-green-500 ${
+                  isActive ? "text-green-500" : "text-white"
+                }`
+              }
+            >
+              Movie Recommendations
+            </NavLink>
           </div>
           <div className="hover:border-b-2 hover:border-green-500 mx-5">
             search
           </div>
-          <div className="hover:border-b-2 hover:border-green-500 mx-5">
-            <button>Profile</button>
+          <div className="mx-5">
+            <NavLink
+              to="/profile"
+              className={({ isActive }) =>
+                `hover:border-b-2 hover:border-green-500 ${
+                  isActive ? "text-green-500" : "text-white"
+                }`
+              }
+            >
+              Profile
+            </NavLink>
           </div>
-          <div className="hover:border-b-2 hover:border-green-500 mx-5">
-            <button>Logout</button>
+          <div className="mx-5">
+            <button
+              className="hover:border-b-2 hover:border-green-500"
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
           </div>
         </div>
       </div>
