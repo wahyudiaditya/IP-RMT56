@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from "react-router";
 import AuthForm from "../../components/form/AuthForm";
 import InputForm from "../../components/ui/InputForm";
 import Button from "../../components/ui/Button";
-import { swalError } from "../../../helpers/swallToast";
+import { swalError } from "../../utils/swallAlert";
 import { useDispatch } from "react-redux";
 import { login } from "../../features/auth/authSlice";
 

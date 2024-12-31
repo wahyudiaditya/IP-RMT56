@@ -1,46 +1,18 @@
 import { useEffect, useState } from "react";
 import Card from "../../components/ui/Card";
-import { swalError } from "../../../helpers/swallToast";
-import { myRecMovie } from "../../../helpers/http-client";
-import Swal from "sweetalert2";
 import { FaArrowLeft } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchMovies } from "../../features/movies/moviesSlice";
 
 export default function Homepage() {
-  const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-
-  const fetchMovies = async () => {
-    Swal.fire({
-      title: "Getting Movies",
-      html: "Please wait ...",
-      didOpen: () => {
-        Swal.showLoading();
-      },
-    });
-    try {
-      const { data } = await myRecMovie.get("movies", {
-        params: {
-          page: page.toString(),
-        },
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-        },
-      });
-
-      setMovies(data.results);
-      setTotalPages(data.totalPages);
-    } catch (error) {
-      console.log(error);
-      swalError(error.response.data.message);
-    } finally {
-      Swal.close();
-    }
-  };
+  const movies = useSelector((state) => state.movies.list.data);
+  const totalPages = useSelector((state) => state.movies.list.totalPages);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    fetchMovies();
+    dispatch(fetchMovies(page));
   }, [page]);
 
   const handleNextPage = () => {

@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router";
-import { swalError, swalSuccess } from "../../../helpers/swallToast";
+import { swalError, swalSuccess } from "../../utils/swallAlert";
 
 export default function HomeNavbar() {
   const navigate = useNavigate();

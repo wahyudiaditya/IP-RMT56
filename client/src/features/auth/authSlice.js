@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { myRecMovie } from "../../../helpers/http-client";
-import { swalSuccess } from "../../../helpers/swallToast";
+import { myRecMovie } from "../../utils/http-client";
+import { swalSuccess } from "../../utils/swallAlert";
 
 export const authSlice = createSlice({
   name: "auth",
@@ -32,7 +32,7 @@ export const login = (email, password) => {
 };
 
 export const register = (email, password) => {
-  return async (dispatch) => {
+  return async () => {
     await myRecMovie.post("auths/register", {
       email,
       password,

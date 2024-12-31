@@ -30,7 +30,7 @@ class MovieController {
           title: result.title,
           posterUrl: fullImageUrlPoster(result.poster_path),
           releaseDate: new Date(result.release_date).getFullYear(),
-          rating: +result.vote_average.toFixed(1),
+          rating: result.vote_average.toFixed(1),
         };
       });
       res.json({

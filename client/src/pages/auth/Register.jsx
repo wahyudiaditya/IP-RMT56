@@ -3,7 +3,7 @@ import { useState } from "react";
 import Button from "../../components/ui/Button";
 import InputForm from "../../components/ui/InputForm";
 import AuthForm from "../../components/form/AuthForm";
-import { swalError } from "../../../helpers/swallToast";
+import { swalError } from "../../utils/swallAlert";
 import { useDispatch } from "react-redux";
 import { register } from "../../features/auth/authSlice";
 

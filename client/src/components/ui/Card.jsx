@@ -37,7 +37,7 @@ Card.propTypes = {
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     posterUrl: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
+    rating: PropTypes.string.isRequired,
     releaseDate: PropTypes.number.isRequired,
   }),
 };
