@@ -30,20 +30,23 @@ export default function AuthForm({
     const initializeGoogleSignInButton = () => {
       const buttonSize = window.innerWidth < 600 ? "small" : "large";
 
-      google.accounts.id.renderButton(document.getElementById("buttonDiv"), {
-        theme: "outline",
-        size: buttonSize,
-      });
+      window.google.accounts.id.renderButton(
+        document.getElementById("buttonDiv"),
+        {
+          theme: "outline",
+          size: buttonSize,
+        }
+      );
     };
 
-    google.accounts.id.initialize({
+    window.google.accounts.id.initialize({
       client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
       callback: handleCredentialResponse,
     });
 
     initializeGoogleSignInButton();
 
-    google.accounts.id.prompt();
+    window.google.accounts.id.prompt();
 
     window.addEventListener("resize", initializeGoogleSignInButton);
 

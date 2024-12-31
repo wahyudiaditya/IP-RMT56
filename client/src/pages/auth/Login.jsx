@@ -1,26 +1,23 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router";
-import { myRecMovie } from "../../../helpers/http-client";
 import AuthForm from "../../components/form/AuthForm";
 import InputForm from "../../components/ui/InputForm";
 import Button from "../../components/ui/Button";
-import { swalError, swalSuccess } from "../../../helpers/swallToast";
+import { swalError } from "../../../helpers/swallToast";
+import { useDispatch } from "react-redux";
+import { login } from "../../features/auth/authSlice";
 
 export default function Login() {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const navigate = useNavigate();
+
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
-      const { data } = await myRecMovie.post("auths/login", {
-        email,
-        password,
-      });
-      localStorage.setItem("access_token", data.access_token);
-      swalSuccess("Login Successfully");
+      await dispatch(login(email, password));
       navigate("/");
     } catch (error) {
       console.log(error);

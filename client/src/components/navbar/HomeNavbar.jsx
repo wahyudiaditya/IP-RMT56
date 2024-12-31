@@ -15,7 +15,7 @@ export default function HomeNavbar() {
   }
   return (
     <>
-      <div className="h-[87px] bg-sky-950 text-white border-b border-gray-200">
+      <div className="h-[87px] bg-sky-950 text-white text-xl">
         <div className="flex items-center h-full container mx-auto font-semibold">
           <div className="text-4xl font-bold text-green-500">
             <NavLink to="/">MyRecMovie</NavLink>

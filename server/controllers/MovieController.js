@@ -23,7 +23,21 @@ class MovieController {
           page,
         },
       });
-      res.json(response.data);
+
+      const results = response.data.results.map((result) => {
+        return {
+          id: result.id,
+          title: result.title,
+          posterUrl: fullImageUrlPoster(result.poster_path),
+          releaseDate: new Date(result.release_date).getFullYear(),
+          rating: +result.vote_average.toFixed(1),
+        };
+      });
+      res.json({
+        page: response.data.page,
+        results: results,
+        totalPages: response.data.total_pages,
+      });
     } catch (error) {
       next(error);
     }
@@ -92,22 +106,27 @@ class MovieController {
 
   static async geminiRec(req, res, next) {
     try {
-      const preference = await Preference.findOne({
-        where: {
-          UserId: req.user.id,
-        },
-      });
+      // const preference = await Preference.findOne({
+      //   where: {
+      //     UserId: req.user.id,
+      //   },
+      // });
 
-      if (!preference) {
-        throw {
-          name: "NotFound",
-          message: "User has not completed preferences",
-        };
-      }
+      // if (!preference) {
+      //   throw {
+      //     name: "NotFound",
+      //     message: "User has not completed preferences",
+      //   };
+      // }
+
+      let actors = "christ hamsworth,robert downy jr";
+      let genres = "action,adventure";
 
       let aiRec = await geminiRecomendation(
-        preference.favoriteGenres,
-        preference.favoriteActors
+        // preference.favoriteGenres,
+        // preference.favoriteActors
+        genres,
+        actors
       );
 
       res.json(aiRec);
