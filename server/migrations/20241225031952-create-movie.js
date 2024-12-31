@@ -19,7 +19,7 @@ module.exports = {
         type: Sequelize.DATE,
       },
       overview: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
       },
       rating: {
         type: Sequelize.FLOAT,

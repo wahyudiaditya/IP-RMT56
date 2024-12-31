@@ -29,7 +29,7 @@ class MovieController {
           id: result.id,
           title: result.title,
           posterUrl: fullImageUrlPoster(result.poster_path),
-          releaseDate: new Date(result.release_date).getFullYear(),
+          releaseDate: result.release_date,
           rating: result.vote_average.toFixed(1),
         };
       });
@@ -77,6 +77,7 @@ class MovieController {
           posterUrl: fullImageUrlPoster(getMovie.poster_path),
           backdropUrl: fullImageUrlBackdrop(getMovie.backdrop_path),
         });
+
         res.json(newMovie);
       } else {
         res.json(movie);

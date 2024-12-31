@@ -4,6 +4,9 @@ import { FaArrowLeft } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMovies } from "../../features/movies/moviesSlice";
+import { NavLink } from "react-router";
+import { isDetail } from "../../features/components/cardSlice";
+import { getYear } from "../../utils/formatDate";
 
 export default function Homepage() {
   const [page, setPage] = useState(1);
@@ -14,6 +17,10 @@ export default function Homepage() {
   useEffect(() => {
     dispatch(fetchMovies(page));
   }, [page]);
+
+  useEffect(() => {
+    dispatch(isDetail(false));
+  }, []);
 
   const handleNextPage = () => {
     if (page < totalPages) {
@@ -56,15 +63,16 @@ export default function Homepage() {
                 key={movie.id}
                 className="col-span-1 max-w-full flex justify-center py-4"
               >
-                <Card
-                  movie={{
-                    id: movie.id,
-                    title: movie.title,
-                    posterUrl: movie.posterUrl,
-                    rating: movie.rating,
-                    releaseDate: movie.releaseDate,
-                  }}
-                />
+                <NavLink to={`/movie/${movie.id}`}>
+                  <Card
+                    movie={{
+                      title: movie.title,
+                      posterUrl: movie.posterUrl,
+                      rating: movie.rating,
+                      releaseDate: getYear(movie.releaseDate),
+                    }}
+                  />
+                </NavLink>
               </div>
             ))}
           </div>

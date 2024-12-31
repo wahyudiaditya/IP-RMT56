@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       title: DataTypes.STRING,
       genre: DataTypes.STRING,
       releaseDate: DataTypes.DATE,
-      overview: DataTypes.STRING,
+      overview: DataTypes.TEXT,
       rating: DataTypes.FLOAT,
       posterUrl: DataTypes.STRING,
       backdropUrl: DataTypes.STRING,

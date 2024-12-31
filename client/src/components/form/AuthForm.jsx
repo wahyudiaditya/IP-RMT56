@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 import { useEffect } from "react";
-import { useNavigate } from "react-router";
 import { myRecMovie } from "../../utils/http-client";
 import { swalSuccess } from "../../utils/swallAlert";
+import { useNavigate } from "react-router";
 
 export default function AuthForm({
   formType,

@@ -5,6 +5,7 @@ import UnAuthLayout from "./layouts/UnAuthLayout";
 import Homepage from "./pages/home/Homepage";
 import AuthLayout from "./layouts/AuthLayout";
 import HomeLayout from "./layouts/HomeLayout";
+import MovieDetail from "./pages/movies/MovieDetail";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route element={<AuthLayout />}>
             <Route element={<HomeLayout />}>
               <Route path="/" element={<Homepage />} />
+              <Route path="/movie/:id" element={<MovieDetail />} />
             </Route>
           </Route>
         </Routes>

@@ -1,6 +1,6 @@
 // import { createSlice } from "@reduxjs/toolkit";
-// import { myRecMovie } from "../../../../helpers/http-client";
-// import { swalSuccess } from "../../../../helpers/swallToast";
+// import { myRecMovie } from "../../../utils/http-client";
+// import { swalSuccess } from "../../../utils/swallAlert";
 
 // export const authFormSlice = createSlice({
 //   name: "authForm",
