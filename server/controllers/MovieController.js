@@ -1,12 +1,19 @@
 const { geminiFunFact, geminiRecomendation } = require("../helpers/gemini");
+const {
+  fullImageUrlPoster,
+  fullImageUrlBackdrop,
+} = require("../helpers/tmdbImgUrl");
 const { Movie, Preference } = require("../models");
 const axios = require("axios");
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 class MovieController {
   static async getAllMovie(req, res, next) {
     try {
       const baseURL = "https://api.themoviedb.org/3/movie/popular";
       const { page } = req.query;
+
+      await sleep(1000);
 
       const response = await axios.get(baseURL, {
         headers: {
@@ -29,6 +36,7 @@ class MovieController {
 
       if (!movie) {
         const baseURL = `https://api.themoviedb.org/3/movie/${id}`;
+        await sleep(1000);
 
         const response = await axios.get(baseURL, {
           headers: {
@@ -52,8 +60,8 @@ class MovieController {
           releaseDate: getMovie.release_date,
           overview: getMovie.overview,
           rating: getMovie.vote_average,
-          posterUrl: getMovie.poster_path,
-          trailerUrl: "-",
+          posterUrl: fullImageUrlPoster(getMovie.poster_path),
+          backdropUrl: fullImageUrlBackdrop(getMovie.backdrop_path),
         });
         res.json(newMovie);
       } else {

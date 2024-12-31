@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       overview: DataTypes.STRING,
       rating: DataTypes.FLOAT,
       posterUrl: DataTypes.STRING,
-      trailerUrl: DataTypes.STRING,
+      backdropUrl: DataTypes.STRING,
     },
     {
       sequelize,
