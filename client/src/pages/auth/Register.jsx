@@ -1,29 +1,26 @@
-import { myRecMovie } from "../../../helpers/http-client";
 import { NavLink, useNavigate } from "react-router";
 import { useState } from "react";
 import Button from "../../components/ui/Button";
 import InputForm from "../../components/ui/InputForm";
 import AuthForm from "../../components/form/AuthForm";
-import { swalError, swalSuccess } from "../../../helpers/swallToast";
+import { swalError } from "../../../helpers/swallToast";
+import { useDispatch } from "react-redux";
+import { register } from "../../features/auth/authSlice";
 
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
 
     try {
-      await myRecMovie.post("auths/register", {
-        email,
-        password,
-      });
+      await dispatch(register(email, password));
 
       setEmail("");
       setPassword("");
-
-      swalSuccess("Register Successfully");
       navigate("/login");
     } catch (error) {
       console.log(error);

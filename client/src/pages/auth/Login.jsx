@@ -15,7 +15,6 @@ export default function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
     try {
       await dispatch(login(email, password));
       navigate("/");
