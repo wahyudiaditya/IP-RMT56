@@ -8,7 +8,7 @@ export default function Modal({ modalName, handleCloseModal, data }) {
         <div className="flex justify-between items-center">
           <h1 className="font-semibold text-xl">{modalName}</h1>
           <button id="close-add-btn" onClick={handleCloseModal}>
-            <MdClose className="text-red-500" />
+            <MdClose className="text-red-500 text-2xl" />
           </button>
         </div>
         <div className="pt-4 max-h-[500px] overflow-y-auto">{data}</div>

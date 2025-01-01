@@ -4,6 +4,7 @@ export const modalSlice = createSlice({
   name: "modal",
   initialState: {
     modalFunFactsOpen: false,
+    modalRecommendationOpen: false,
   },
   reducers: {
     openFunFactsModal: (state) => {
@@ -12,9 +13,20 @@ export const modalSlice = createSlice({
     closeFunFactsModal: (state) => {
       state.modalFunFactsOpen = false;
     },
+    openRecommendationModal: (state) => {
+      state.modalRecommendationOpen = true;
+    },
+    closeRecommendationModal: (state) => {
+      state.modalRecommendationOpen = false;
+    },
   },
 });
 
-export const { openFunFactsModal, closeFunFactsModal } = modalSlice.actions;
+export const {
+  openFunFactsModal,
+  closeFunFactsModal,
+  openRecommendationModal,
+  closeRecommendationModal,
+} = modalSlice.actions;
 
 export default modalSlice.reducer;

@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { swalError } from "../../utils/swallAlert";
+import { swalError, swalSuccess } from "../../utils/swallAlert";
 import Swal from "sweetalert2";
 import { myRecMovie } from "../../utils/http-client";
+import { closeRecommendationModal } from "../components/modalSlice";
 
 export const moivesSlice = createSlice({
   name: "movies",
@@ -112,6 +113,23 @@ export const fetchFunFacts = (id) => {
     } finally {
       Swal.close();
     }
+  };
+};
+export const submitRecommendation = (id, reason) => {
+  return async (dispatch) => {
+    await myRecMovie.post(
+      `/recommendations/${id}`,
+      {
+        reason,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        },
+      }
+    );
+    swalSuccess("Success add Movie to Your Recommendation");
+    dispatch(closeRecommendationModal());
   };
 };
 

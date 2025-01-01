@@ -6,7 +6,6 @@ class RecomendationController {
     try {
       const { movieId } = req.params;
       const { reason } = req.body;
-      const baseURL = `https://api.themoviedb.org/3/movie/${movieId}`;
 
       const recommedation = await Recomendation.findOne({
         where: {
