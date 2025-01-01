@@ -14,6 +14,7 @@ export const moivesSlice = createSlice({
       movie: {},
       cast: [],
     },
+    funFacts: "",
   },
   reducers: {
     setMovies: (state, action) => {
@@ -25,13 +26,14 @@ export const moivesSlice = createSlice({
     setMovie: (state, action) => {
       state.movie = action.payload;
     },
-    // setCast:(state,action)=>{
-    //   state.
-    // }
+    setFunFacts: (state, action) => {
+      state.funFacts = action.payload;
+    },
   },
 });
 
-export const { setMovies, setTotalPages, setMovie } = moivesSlice.actions;
+export const { setMovies, setTotalPages, setMovie, setFunFacts } =
+  moivesSlice.actions;
 
 export const fetchMovies = (page) => {
   return async (dispatch) => {
@@ -82,6 +84,30 @@ export const fetchMovie = (id) => {
       dispatch(setMovie(data));
     } catch (error) {
       console.log(error);
+      swalError(error.response.data.message);
+    } finally {
+      Swal.close();
+    }
+  };
+};
+
+export const fetchFunFacts = (id) => {
+  return async (dispatch) => {
+    Swal.fire({
+      title: "Getting Fun Facts By AI",
+      html: "Please wait ...",
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
+    try {
+      const { data } = await myRecMovie.get(`movies/funFacts/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        },
+      });
+      dispatch(setFunFacts(data));
+    } catch (error) {
       swalError(error.response.data.message);
     } finally {
       Swal.close();

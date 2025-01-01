@@ -9,7 +9,7 @@ export default function Card({ movie }) {
       <div
         className={`rounded-md shadow-md bg-white ${
           isDetail
-            ? "w-[300px] h-[450px]"
+            ? "md:w-[300px] md:h-[450px] w-[250px] h-[400px]"
             : "w-[184px] h-[294px] transition-transform duration-500 hover:scale-105"
         }`}
       >
@@ -17,7 +17,7 @@ export default function Card({ movie }) {
           <img
             src={movie.posterUrl}
             className={`w-full rounded-md bg-black bg-opacity-10 object-cover ${
-              isDetail ? "h-[450px]" : "h-[294px]"
+              isDetail ? "md:h-[450px] h-[400px]" : "h-[294px]"
             }`}
             alt="name"
           />

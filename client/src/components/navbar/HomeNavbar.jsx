@@ -11,35 +11,6 @@ export default function HomeNavbar() {
   const handleClick = () => {
     setClick(!click);
   };
-
-  const content = (
-    <>
-      <div className="lg:hidden block absolute top-12 w-full left-0 right-0 bg-sky-950 transition">
-        <ul className="text-center text-sm p-4 w-full">
-          <NavLink>
-            <li className="my-4 py-4 border-b border-sky-900 hover:bg-sky-900 hover:rounded-md">
-              Home
-            </li>
-          </NavLink>
-          <NavLink>
-            <li className="my-4 py-4 border-b border-sky-900 hover:bg-sky-900 hover:rounded-md">
-              Movie Recommendations
-            </li>
-          </NavLink>
-          <NavLink>
-            <li className="my-4 py-4 border-b border-sky-900 hover:bg-sky-900 hover:rounded-md">
-              Profile
-            </li>
-          </NavLink>
-          <NavLink>
-            <li className="my-4 py-4 border-b border-sky-900 hover:bg-sky-900 hover:rounded-md">
-              Logout
-            </li>
-          </NavLink>
-        </ul>
-      </div>
-    </>
-  );
   function handleLogout() {
     try {
       localStorage.removeItem("access_token");
@@ -50,10 +21,53 @@ export default function HomeNavbar() {
       swalError(error.response.data.message);
     }
   }
+
+  const content = (
+    <>
+      <div className="lg:hidden block absolute top-12 w-full left-0 right-0 bg-sky-950 transition">
+        <ul className="text-center text-sm p-4 w-full">
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              `${isActive ? "text-green-500" : "text-white"}`
+            }
+          >
+            <li className="my-4 py-4 border-b border-sky-900 hover:bg-sky-900 hover:rounded-md">
+              Home
+            </li>
+          </NavLink>
+          <NavLink
+            to="/recomendations"
+            className={({ isActive }) =>
+              `${isActive ? "text-green-500" : "text-white"}`
+            }
+          >
+            <li className="my-4 py-4 border-b border-sky-900 hover:bg-sky-900 hover:rounded-md">
+              Movie Recommendations
+            </li>
+          </NavLink>
+          <NavLink
+            to="/profile"
+            className={({ isActive }) =>
+              `${isActive ? "text-green-500" : "text-white"}`
+            }
+          >
+            <li className="my-4 py-4 border-b border-sky-900 hover:bg-sky-900 hover:rounded-md">
+              Profile
+            </li>
+          </NavLink>
+          <li className="my-4 py-4 border-b border-sky-900 hover:bg-sky-900 hover:rounded-md">
+            <button onClick={handleLogout}>Logout</button>
+          </li>
+        </ul>
+      </div>
+    </>
+  );
+
   return (
     <>
       <div className="md:h-[70px] h-[50px] bg-sky-950 text-white text-xl">
-        <div className="flex items-center h-full container md:mx-auto w-full font-semibold">
+        <div className="flex items-center h-full container lg:mx-auto md:w-[1200px] w-full font-semibold">
           <div className="lg:text-4xl md:text-2xl text-base font-bold me-auto md:px-0 px-4 text-green-500">
             <NavLink to="/">MyRecMovie</NavLink>
           </div>
@@ -62,7 +76,7 @@ export default function HomeNavbar() {
               <NavLink
                 to="/"
                 className={({ isActive }) =>
-                  `hover:border-b-2 hover:border-green-500 py-1 mx-5 ms-20 ${
+                  `hover:border-b-2 hover:border-green-500 py-1 mx-5 md:mx-4 ms-20 ${
                     isActive ? "text-green-500" : "text-white"
                   }`
                 }
@@ -70,7 +84,7 @@ export default function HomeNavbar() {
                 Home
               </NavLink>
             </div>
-            <div className="flex text-end w-full mx-5">
+            <div className="flex text-end w-full mx-5 md:mx-2">
               <NavLink
                 to="/recomendations"
                 className={({ isActive }) =>
@@ -82,10 +96,10 @@ export default function HomeNavbar() {
                 Movie Recommendations
               </NavLink>
             </div>
-            <div className="hover:border-b-2 hover:border-green-500 mx-5">
+            <div className="hover:border-b-2 hover:border-green-500 mx-5 md:mx-2">
               search
             </div>
-            <div className="mx-5">
+            <div className="mx-5 md:mx-2">
               <NavLink
                 to="/profile"
                 className={({ isActive }) =>
@@ -97,7 +111,7 @@ export default function HomeNavbar() {
                 Profile
               </NavLink>
             </div>
-            <div className="mx-5">
+            <div className="mx-5 md:mx-2">
               <button
                 className="hover:border-b-2 border-b-2 border-transparent hover:border-green-500"
                 onClick={handleLogout}

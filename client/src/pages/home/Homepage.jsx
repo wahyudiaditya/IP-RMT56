@@ -36,18 +36,18 @@ export default function Homepage() {
 
   return (
     <>
-      <div className="homepage-banner rounded-b-md">
+      <div className="homepage-banner rounded-b-md ">
         <div className="text-white flex h-full">
           <div className="me-auto"></div>
           <div className="bg-gradient-to-l from-black via-transparent to-transparent w-full">
-            <div className="h-full flex flex-col justify-center items-end text-4xl font-bold px-10 pt-64">
+            <div className="h-full flex flex-col justify-center items-end md:text-4xl font-bold px-10 pt-64">
               <h1>Your Next Favorite Movie,</h1>
               <h1>Recommended by Users & AI!</h1>
             </div>
           </div>
         </div>
       </div>
-      <div className="md:container md:mx-auto text-black mt-10 ">
+      <div className="md:container lg:mx-auto md:w-[1200px] text-black mt-10 ">
         <div className="md:flex md:items-center">
           <p className="md:text-2xl font-bold md:me-auto border-b-4 border-green-500">
             Popular Movies
@@ -61,7 +61,7 @@ export default function Homepage() {
             {movies.map((movie) => (
               <div
                 key={movie.id}
-                className="col-span-1 max-w-full flex justify-center py-4"
+                className="col-span-1 max-w-full flex justify-center py-4 md:py-2"
               >
                 <NavLink to={`/movie/${movie.id}`}>
                   <Card

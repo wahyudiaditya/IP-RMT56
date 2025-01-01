@@ -13,6 +13,19 @@ body {
   width: 100%;
   height: 62vh;
 }
+
+/* Mengatur responsivitas pada layar lebih kecil */
+@media (max-width: 768px) {
+  .homepage-banner {
+    height: 50vh; /* Sesuaikan dengan tinggi layar lebih kecil */
+  }
+}
+
+@media (max-width: 480px) {
+  .homepage-banner {
+    height: 18vh; /* Sesuaikan lebih lanjut untuk layar sangat kecil */
+  }
+}
 /* Ensure SweetAlert2 is responsive */
 .swal2-popup {
   width: 100% important;
