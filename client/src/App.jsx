@@ -6,6 +6,7 @@ import Homepage from "./pages/home/Homepage";
 import AuthLayout from "./layouts/AuthLayout";
 import HomeLayout from "./layouts/HomeLayout";
 import MovieDetail from "./pages/movies/MovieDetail";
+import HomeNavbar from "./components/navbar/HomeNavbar";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
               <Route path="/movie/:id" element={<MovieDetail />} />
             </Route>
           </Route>
+          <Route path="/navbar" element={<HomeNavbar />} />
         </Routes>
       </BrowserRouter>
     </>
