@@ -9,15 +9,15 @@ import { convertMinutesToHours } from "../../utils/formatTime";
 import StarRating from "../../components/ui/StarRating";
 import { FcIdea } from "react-icons/fc";
 import { FcLike } from "react-icons/fc";
+import CardCast from "../../components/ui/CardCast";
 
 export default function MovieDetail() {
-  const movie = useSelector((state) => state.movies.movie);
+  const movie = useSelector((state) => state.movies.movie.movie);
+  const cast = useSelector((state) => state.movies.movie.cast);
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  console.log(movie, "ini apaan ?");
-
-  const rating = movie.movie.rating;
+  const rating = movie.rating;
 
   useEffect(() => {
     dispatch(fetchMovie(id));
@@ -32,31 +32,31 @@ export default function MovieDetail() {
       <div>
         <div className="relative w-full h-[600px]">
           <div
-            style={{ backgroundImage: `url("${movie.movie.backdropUrl}")` }}
+            style={{ backgroundImage: `url("${movie.backdropUrl}")` }}
             className={`bg-top bg-no-repeat bg-cover h-full opacity-40 absolute top-0 left-0 w-full z-0`}
           ></div>
 
           <div className="relative z-10 text-black container mx-auto pt-8 flex items-center">
             <Card
               movie={{
-                posterUrl: movie.movie.posterUrl,
+                posterUrl: movie.posterUrl,
               }}
             />
             <div className="ps-10">
               <div className="flex items-center text-5xl">
-                <div className="font-bold">{movie.movie.title}</div>
-                <div className="px-2">({getYear(movie.movie.releaseDate)})</div>
+                <div className="font-bold">{movie.title}</div>
+                <div className="px-2">({getYear(movie.releaseDate)})</div>
               </div>
 
               <div className="flex text-xl py-1">
                 <div className="flex items-center border-r-2 px-2 border-black h-6">
-                  {formatToDefaultDate(movie.movie.releaseDate)}
+                  {formatToDefaultDate(movie.releaseDate)}
                 </div>
                 <div className="flex items-center border-r-2 px-2 border-black h-6">
-                  {movie.movie.genre}
+                  {movie.genre}
                 </div>
                 <div className="flex items-center px-2">
-                  {convertMinutesToHours(movie.movie.runTime)}
+                  {convertMinutesToHours(movie.runTime)}
                 </div>
               </div>
 
@@ -85,8 +85,26 @@ export default function MovieDetail() {
                 <span className="text-2xl font-semibold border-b-2">
                   Overview
                 </span>
-                <p className="text-xl pt-2">{movie.movie.overview}</p>
+                <p className="text-xl pt-2">{movie.overview}</p>
               </div>
+            </div>
+          </div>
+        </div>
+        <div className="container pt-5 mx-auto flex">
+          <div className="text-2xl px-10 font-bold h-fit w-fit">CAST</div>
+          <div className="overflow-x-auto p-4">
+            <div className="flex space-x-4">
+              {cast.map((el) => (
+                <div key={el.id}>
+                  <CardCast
+                    cast={{
+                      posterUrl: el.profile_path,
+                      name: el.name,
+                      character: el.character,
+                    }}
+                  />
+                </div>
+              ))}
             </div>
           </div>
         </div>

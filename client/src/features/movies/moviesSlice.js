@@ -10,7 +10,10 @@ export const moivesSlice = createSlice({
       data: [],
       totalPages: 0,
     },
-    movie: {},
+    movie: {
+      movie: {},
+      cast: [],
+    },
   },
   reducers: {
     setMovies: (state, action) => {
@@ -22,6 +25,9 @@ export const moivesSlice = createSlice({
     setMovie: (state, action) => {
       state.movie = action.payload;
     },
+    // setCast:(state,action)=>{
+    //   state.
+    // }
   },
 });
 
