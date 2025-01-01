@@ -48,6 +48,15 @@ class MovieController {
       const { id } = req.params;
       const movie = await Movie.findByPk(+id);
 
+      const baseUrlCast = `https://api.themoviedb.org/3/movie/${id}/credits`;
+
+      const { data } = await axios.get(baseUrlCast, {
+        headers: {
+          Authorization: `Bearer ${process.env.TMDB_API_KEY}`,
+        },
+      });
+      const cast = data.cast;
+
       if (!movie) {
         const baseURL = `https://api.themoviedb.org/3/movie/${id}`;
         await sleep(1000);
@@ -79,9 +88,9 @@ class MovieController {
           runTime: getMovie.runtime,
         });
 
-        res.json(newMovie);
+        res.json({ movie: newMovie, cast: cast });
       } else {
-        res.json(movie);
+        res.json({ movie: movie, cast: cast });
       }
     } catch (error) {
       next(error);

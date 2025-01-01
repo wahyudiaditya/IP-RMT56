@@ -14,7 +14,10 @@ export default function MovieDetail() {
   const movie = useSelector((state) => state.movies.movie);
   const dispatch = useDispatch();
   const { id } = useParams();
-  const rating = movie.rating;
+
+  console.log(movie, "ini apaan ?");
+
+  const rating = movie.movie.rating;
 
   useEffect(() => {
     dispatch(fetchMovie(id));
@@ -29,31 +32,31 @@ export default function MovieDetail() {
       <div>
         <div className="relative w-full h-[600px]">
           <div
-            style={{ backgroundImage: `url("${movie.backdropUrl}")` }}
+            style={{ backgroundImage: `url("${movie.movie.backdropUrl}")` }}
             className={`bg-top bg-no-repeat bg-cover h-full opacity-40 absolute top-0 left-0 w-full z-0`}
           ></div>
 
           <div className="relative z-10 text-black container mx-auto pt-8 flex items-center">
             <Card
               movie={{
-                posterUrl: movie.posterUrl,
+                posterUrl: movie.movie.posterUrl,
               }}
             />
             <div className="ps-10">
               <div className="flex items-center text-5xl">
-                <div className="font-bold">{movie.title}</div>
-                <div className="px-2">({getYear(movie.releaseDate)})</div>
+                <div className="font-bold">{movie.movie.title}</div>
+                <div className="px-2">({getYear(movie.movie.releaseDate)})</div>
               </div>
 
               <div className="flex text-xl py-1">
                 <div className="flex items-center border-r-2 px-2 border-black h-6">
-                  {formatToDefaultDate(movie.releaseDate)}
+                  {formatToDefaultDate(movie.movie.releaseDate)}
                 </div>
                 <div className="flex items-center border-r-2 px-2 border-black h-6">
-                  {movie.genre}
+                  {movie.movie.genre}
                 </div>
                 <div className="flex items-center px-2">
-                  {convertMinutesToHours(movie.runTime)}
+                  {convertMinutesToHours(movie.movie.runTime)}
                 </div>
               </div>
 
@@ -61,7 +64,9 @@ export default function MovieDetail() {
                 <div className="text-4xl">
                   <StarRating rating={rating} />
                 </div>
-                <div className="text-2xl px-1 pe-10">{rating}</div>
+                <div className="text-2xl px-1 pe-10 font-semibold">
+                  {rating}
+                </div>
                 <div className="flex items-center py-1 px-3 pt-1 hover:outline-none outline-none rounded-lg bg-sky-950 text-yellow-500">
                   <FcIdea />
                   <button className="px-2 pt-1">Fun Facts</button>
@@ -76,9 +81,11 @@ export default function MovieDetail() {
                   </span>
                 </button>
               </div>
-              <div className="pt-2 w-[800px]">
-                <span className="text-2xl font-semibold">Overview</span>
-                <p className="text-xl">{movie.overview}</p>
+              <div className="pt-8 w-[1000px]">
+                <span className="text-2xl font-semibold border-b-2">
+                  Overview
+                </span>
+                <p className="text-xl pt-2">{movie.movie.overview}</p>
               </div>
             </div>
           </div>
