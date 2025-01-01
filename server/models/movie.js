@@ -23,6 +23,10 @@ module.exports = (sequelize, DataTypes) => {
       rating: DataTypes.FLOAT,
       posterUrl: DataTypes.STRING,
       backdropUrl: DataTypes.STRING,
+      runTime: {
+        type: DataTypes.INTEGER,
+        defaultValue: "-",
+      },
     },
     {
       sequelize,

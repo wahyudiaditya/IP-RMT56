@@ -30,6 +30,9 @@ module.exports = {
       backdropUrl: {
         type: Sequelize.STRING,
       },
+      runTime: {
+        type: Sequelize.INTEGER,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

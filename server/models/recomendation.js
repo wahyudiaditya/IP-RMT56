@@ -19,9 +19,26 @@ module.exports = (sequelize, DataTypes) => {
   }
   Recomendation.init(
     {
-      UserId: DataTypes.INTEGER,
-      MovieId: DataTypes.INTEGER,
-      reason: DataTypes.STRING,
+      UserId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      MovieId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      reason: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "Reason cannot empty",
+          },
+          notEmpty: {
+            msg: "Reason cannot empty",
+          },
+        },
+      },
     },
     {
       sequelize,

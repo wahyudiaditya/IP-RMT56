@@ -1,22 +1,11 @@
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
-// import { useState } from "react";
-// import { useParams } from "react-router";
 
 export default function Card({ movie }) {
-  // const [isDetail, setIsDetail] = useState(false);
-  // const { id } = useParams();
-  // if (id) {
-  //   setIsDetail(true);
-  // }
-  // console.log(isDetail, "ini apaan ges ?");
-
   const isDetail = useSelector((state) => state.card.detail);
 
   return (
     <div>
-      {/* Card Product */}
-
       <div
         className={`rounded-md shadow-md bg-white ${
           isDetail
@@ -44,7 +33,6 @@ export default function Card({ movie }) {
           </div>
         </div>
       </div>
-      {/* Card Product */}
     </div>
   );
 }

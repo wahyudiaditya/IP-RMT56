@@ -1,5 +1,5 @@
 const { signToken } = require("../helpers/jwt");
-const { User, Preference } = require("../models");
+const { User, Preference, Recomendation } = require("../models");
 
 class UserController {
   static async addPreference(req, res, next) {
@@ -57,6 +57,20 @@ class UserController {
         attributes: { exclude: ["password", "createdAt", "updatedAt"] },
       });
       res.json({ user });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async allUserRecommendations(req, res, next) {
+    try {
+      const users = await User.findAll({
+        include: {
+          model: Recomendation,
+        },
+        attributes: { exclude: ["password", "googleId"] },
+      });
+      res.json({ users });
     } catch (error) {
       next(error);
     }

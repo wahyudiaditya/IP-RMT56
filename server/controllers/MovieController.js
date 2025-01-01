@@ -73,9 +73,10 @@ class MovieController {
           genre: getGenres,
           releaseDate: getMovie.release_date,
           overview: getMovie.overview,
-          rating: getMovie.vote_average,
+          rating: getMovie.vote_average.toFixed(1),
           posterUrl: fullImageUrlPoster(getMovie.poster_path),
           backdropUrl: fullImageUrlBackdrop(getMovie.backdrop_path),
+          runTime: getMovie.runtime,
         });
 
         res.json(newMovie);
@@ -132,7 +133,7 @@ class MovieController {
 
       res.json(aiRec);
     } catch (error) {
-      console.log(error);
+      next(error);
     }
   }
 }
