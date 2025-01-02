@@ -31,14 +31,15 @@ export const fetchUser = () => {
   };
 };
 
-export const submitUpdateProfile = (name, actors, genres) => {
+export const submitUpdateProfile = (name, profilePicture, actors, genres) => {
   return async () => {
     await myRecMovie.put(
       "users/profiles",
       {
         name,
-        actors,
-        genres,
+        profilePicture,
+        favoriteActors: actors,
+        favoriteGenres: genres,
       },
       {
         headers: {
