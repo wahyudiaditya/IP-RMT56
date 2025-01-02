@@ -106,9 +106,9 @@ export default function UserProfile() {
                   src={user?.profilePicture}
                 />
                 {user.email ? (
-                  <span className="text-black">{user.email}</span>
+                  <span className="text-black pt-4">{user.email}</span>
                 ) : (
-                  <span className="text-black">-</span>
+                  <span className="text-black pt-4">-</span>
                 )}
               </div>
             </div>

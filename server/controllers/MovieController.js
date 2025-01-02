@@ -58,42 +58,6 @@ class MovieController {
     }
   }
 
-  // static async searchMovie(req, res, next) {
-  //   try {
-  //     const { query, page } = req.query;
-  //     const baseURLQuery = `https://api.themoviedb.org/3/search/movie`;
-
-  //     await sleep(1000);
-
-  //     const response = await axios.get(baseURL, {
-  //       headers: {
-  //         Authorization: `Bearer ${process.env.TMDB_API_KEY}`,
-  //       },
-  //       params: {
-  //         query,
-  //         page,
-  //       },
-  //     });
-
-  //     const results = response.data.results.map((result) => {
-  //       return {
-  //         id: result.id,
-  //         title: result.title,
-  //         posterUrl: fullImageUrlPoster(result.poster_path),
-  //         releaseDate: result.release_date,
-  //         rating: result.vote_average.toFixed(1),
-  //       };
-  //     });
-  //     res.json({
-  //       page: response.data.page,
-  //       results: results,
-  //       totalPages: response.data.total_pages,
-  //     });
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // }
-
   static async movieDetail(req, res, next) {
     try {
       const { id } = req.params;
@@ -104,6 +68,7 @@ class MovieController {
       });
 
       const baseUrlCast = `https://api.themoviedb.org/3/movie/${id}/credits`;
+      await sleep(1000);
 
       const { data } = await axios.get(baseUrlCast, {
         headers: {

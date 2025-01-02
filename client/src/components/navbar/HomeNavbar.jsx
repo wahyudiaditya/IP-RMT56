@@ -86,7 +86,7 @@ export default function HomeNavbar() {
             </div>
             <div className="flex text-end w-full mx-5 md:mx-2">
               <NavLink
-                to="/recomendations"
+                to="/recommendations"
                 className={({ isActive }) =>
                   `hover:border-b-2 hover:border-green-500 ${
                     isActive ? "text-green-500" : "text-white"

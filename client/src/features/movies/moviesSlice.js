@@ -42,7 +42,7 @@ export const { setMovies, setTotalPages, setMovie, setFunFacts, setLoading } =
 
 export const fetchMovies = (page, query) => {
   return async (dispatch) => {
-    if (!query) {
+    if (query < 3) {
       Swal.fire({
         title: "Getting Movies",
         html: "Please wait ...",
