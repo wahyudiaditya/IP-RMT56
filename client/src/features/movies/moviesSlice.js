@@ -40,18 +40,21 @@ export const moivesSlice = createSlice({
 export const { setMovies, setTotalPages, setMovie, setFunFacts, setLoading } =
   moivesSlice.actions;
 
-export const fetchMovies = (page) => {
+export const fetchMovies = (page, query) => {
   return async (dispatch) => {
-    Swal.fire({
-      title: "Getting Movies",
-      html: "Please wait ...",
-      didOpen: () => {
-        Swal.showLoading();
-      },
-    });
+    if (!query) {
+      Swal.fire({
+        title: "Getting Movies",
+        html: "Please wait ...",
+        didOpen: () => {
+          Swal.showLoading();
+        },
+      });
+    }
     try {
       const { data } = await myRecMovie.get("movies", {
         params: {
+          query,
           page: page.toString(),
         },
         headers: {
@@ -65,7 +68,9 @@ export const fetchMovies = (page) => {
       console.log(error);
       swalError(error.response.data.message);
     } finally {
-      Swal.close();
+      if (!query) {
+        Swal.close();
+      }
     }
   };
 };

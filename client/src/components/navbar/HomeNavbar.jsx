@@ -96,9 +96,6 @@ export default function HomeNavbar() {
                 Movie Recommendations
               </NavLink>
             </div>
-            <div className="hover:border-b-2 hover:border-green-500 mx-5 md:mx-2">
-              search
-            </div>
             <div className="mx-5 md:mx-2">
               <NavLink
                 to="/profile"

@@ -1,36 +1,9 @@
-const { signToken } = require("../helpers/jwt");
 const { User, Preference, Movie, Recomendation } = require("../models");
 
 class UserController {
-  static async addPreference(req, res, next) {
-    try {
-      const { favoriteGenres, favoriteActors } = req.body;
-      const preference = await Preference.findOne({
-        where: {
-          UserId: req.user.id,
-        },
-      });
-      if (preference) {
-        await preference.update(req.body);
-        res.json({
-          message: "Success update preference",
-        });
-      } else {
-        const addedPreference = await Preference.create({
-          favoriteActors,
-          favoriteGenres,
-          UserId: req.user.id,
-        });
-        res.status(201).json({ message: "Success add preference" });
-      }
-    } catch (error) {
-      next(error);
-    }
-  }
-
   static async updateProfile(req, res, next) {
     try {
-      const { name, favoriteActors, favoriteGenres } = req.body;
+      const { name, profilePicture, favoriteActors, favoriteGenres } = req.body;
       if (!name) {
         throw { name: "BadRequest", message: "Name Required" };
       }
@@ -40,7 +13,7 @@ class UserController {
       if (!user) {
         throw { name: "NotFound", message: "Invalid User" };
       }
-      await user.update({ name });
+      await user.update({ name, profilePicture });
       const preference = await Preference.findOne({
         where: {
           UserId: req.user.id,
