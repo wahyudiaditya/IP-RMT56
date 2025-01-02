@@ -10,6 +10,7 @@ class RecomendationController {
       const recommedation = await Recomendation.findOne({
         where: {
           MovieId: movieId,
+          UserId: req.user.id,
         },
       });
       if (recommedation) {
@@ -22,6 +23,29 @@ class RecomendationController {
       });
       res.status(201).json({
         message: "Success add movie to your recomedation",
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async removeRecommendation(req, res, next) {
+    try {
+      const { movieId } = req.params;
+
+      const recomedation = await Recomendation.findOne({
+        where: {
+          MovieId: movieId,
+          UserId: req.user.id,
+        },
+      });
+      if (!recomedation) {
+        throw { name: "NotFound", message: "Recommendation not found" };
+      }
+
+      await recomedation.destroy();
+      res.json({
+        message: "Recommendation deleted",
       });
     } catch (error) {
       next(error);

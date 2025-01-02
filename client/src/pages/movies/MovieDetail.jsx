@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import parse from "html-react-parser";
 import {
+  deleteRecommendation,
   fetchFunFacts,
   fetchMovie,
   submitRecommendation,
@@ -13,7 +14,6 @@ import { formatToDefaultDate, getYear } from "../../utils/formatDate";
 import { convertMinutesToHours } from "../../utils/formatTime";
 import StarRating from "../../components/ui/StarRating";
 import { FcIdea } from "react-icons/fc";
-import { FcLike } from "react-icons/fc";
 import CardCast from "../../components/ui/CardCast";
 import Modal from "../../components/form/Modal";
 import {
@@ -23,6 +23,7 @@ import {
   openRecommendationModal,
 } from "../../features/components/modalSlice";
 import { swalError } from "../../utils/swallAlert";
+import { FaHeart } from "react-icons/fa";
 
 export default function MovieDetail() {
   const movie = useSelector((state) => state.movies.movie.movie);
@@ -38,6 +39,7 @@ export default function MovieDetail() {
   const dispatch = useDispatch();
   const { id } = useParams();
 
+  const recommendation = movie.Recomendations;
   const rating = movie.rating;
 
   const handleOpenFunFacts = () => {
@@ -49,6 +51,18 @@ export default function MovieDetail() {
     e.preventDefault();
     try {
       await dispatch(submitRecommendation(id, reason));
+      setReason("");
+      dispatch(fetchMovie(id));
+    } catch (error) {
+      swalError(error.response.data.message);
+    }
+  };
+
+  const handleDeleteRecommendation = async (e) => {
+    e.preventDefault();
+    try {
+      await dispatch(deleteRecommendation(id));
+      dispatch(fetchMovie(id));
     } catch (error) {
       swalError(error.response.data.message);
     }
@@ -122,43 +136,58 @@ export default function MovieDetail() {
                 </div>
               </div>
               <div className="flex items-center">
-                <button
-                  className="group relative flex items-center space-x-2 rounded-full p-2 cursor-pointer bg-sky-950"
-                  onClick={() => dispatch(openRecommendationModal())}
-                >
-                  <FcLike className="md:text-2xl" />
-
-                  <span className="opacity-0 group-hover:opacity-100 absolute left-1/2 transform -translate-x-1/2 bottom-[-50px] text-white text-xs bg-sky-950  px-2 py-1 rounded-md shadow-md transition-opacity duration-300">
-                    Add To Your Recommendations
-                  </span>
-                </button>
-                {isOpenRecommendationModal && (
-                  <Modal
-                    modalName="Recommendation"
-                    data={
-                      <div className="flex justify-center w-full">
-                        <form onSubmit={handleSubmitRecommendation}>
-                          <div>
-                            <label>Reason:</label>
+                {recommendation == 0 ? (
+                  <>
+                    <button
+                      className="group relative flex items-center space-x-2 rounded-full p-2 cursor-pointer bg-sky-950"
+                      onClick={() => dispatch(openRecommendationModal())}
+                    >
+                      <FaHeart className="md:text-2xl text-white" />
+                      <span className="opacity-0 group-hover:opacity-100 absolute left-1/2 transform -translate-x-1/2 bottom-[-50px] text-white text-xs bg-sky-950  px-2 py-1 rounded-md shadow-md transition-opacity duration-300">
+                        Add To Your Recommendations
+                      </span>
+                    </button>
+                    {isOpenRecommendationModal && (
+                      <Modal
+                        modalName="Recommendation"
+                        data={
+                          <div className="flex justify-center w-full">
+                            <form onSubmit={handleSubmitRecommendation}>
+                              <div>
+                                <label>Reason:</label>
+                              </div>
+                              <textarea
+                                placeholder="Tell me why you recommend this movie?"
+                                value={reason}
+                                onChange={(e) => setReason(e.target.value)}
+                                className="md:w-[400px] md:h-[200px] px-2 py-1 outline-none hover:outline-none border rounded-md"
+                              ></textarea>
+                              <div className="flex justify-center pt-2">
+                                <button className="border rounded-md bg-sky-950 text-yellow-400 px-4 py-1">
+                                  Add Recommendation
+                                </button>
+                              </div>
+                            </form>
                           </div>
-                          <textarea
-                            placeholder="Tell me why you recommend this movie ?"
-                            value={reason}
-                            onChange={(e) => setReason(e.target.value)}
-                            className="md:w-[400px] md:h-[200px] px-2 py-1 outline-none hover:outline-none border rounded-md"
-                          ></textarea>
-                          <div className="flex justify-center pt-2">
-                            <button className="border rounded-md bg-sky-950 text-yellow-400 px-4 py-1">
-                              Add Recomendation
-                            </button>
-                          </div>
-                        </form>
-                      </div>
-                    }
-                    handleCloseModal={() =>
-                      dispatch(closeRecommendationModal())
-                    }
-                  />
+                        }
+                        handleCloseModal={() =>
+                          dispatch(closeRecommendationModal())
+                        }
+                      />
+                    )}
+                  </>
+                ) : (
+                  <>
+                    <button
+                      className="group relative flex items-center space-x-2 rounded-full p-2 cursor-pointer bg-sky-950"
+                      onClick={handleDeleteRecommendation}
+                    >
+                      <FaHeart className="md:text-2xl text-red-500" />
+                      <span className="opacity-0 group-hover:opacity-100 absolute left-1/2 transform -translate-x-1/2 bottom-[-50px] text-white text-xs bg-sky-950  px-2 py-1 rounded-md shadow-md transition-opacity duration-300">
+                        Remove Your Recommendations
+                      </span>
+                    </button>
+                  </>
                 )}
               </div>
               <div className="md:pt-8 md:w-[900px] w-[300px] pt-4">

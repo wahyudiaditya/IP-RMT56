@@ -3,7 +3,7 @@ const {
   fullImageUrlPoster,
   fullImageUrlBackdrop,
 } = require("../helpers/tmdbImgUrl");
-const { Movie, Preference } = require("../models");
+const { Movie, Preference, Recomendation } = require("../models");
 const axios = require("axios");
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -46,7 +46,11 @@ class MovieController {
   static async movieDetail(req, res, next) {
     try {
       const { id } = req.params;
-      const movie = await Movie.findByPk(+id);
+      const movie = await Movie.findByPk(+id, {
+        include: {
+          model: Recomendation,
+        },
+      });
 
       const baseUrlCast = `https://api.themoviedb.org/3/movie/${id}/credits`;
 

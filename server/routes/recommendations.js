@@ -7,6 +7,10 @@ recommendationsRouter.post(
   "/:movieId",
   RecomendationController.addToMyRecomendation
 );
+recommendationsRouter.delete(
+  "/:movieId",
+  RecomendationController.removeRecommendation
+);
 recommendationsRouter.get("/users", UserController.allUserRecommendations);
 
 module.exports = recommendationsRouter;

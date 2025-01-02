@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 import { useEffect } from "react";
-import { myRecMovie } from "../../utils/http-client";
-import { swalSuccess } from "../../utils/swallAlert";
 import { useNavigate } from "react-router";
+import { googleLogin } from "../../features/auth/components/authFormSlice";
+import { useDispatch } from "react-redux";
 
 export default function AuthForm({
   formType,
@@ -12,14 +12,11 @@ export default function AuthForm({
   spanNeedRegister,
   buttonSubmit,
 }) {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   async function handleCredentialResponse(response) {
     try {
-      const { data } = await myRecMovie.post("auths/login/google", {
-        clientToken: response.credential,
-      });
-      localStorage.setItem("access_token", data.access_token);
-      swalSuccess("Login Successfully");
+      await dispatch(googleLogin(response));
       navigate("/");
     } catch (error) {
       console.log(error);

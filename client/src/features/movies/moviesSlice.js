@@ -115,10 +115,10 @@ export const fetchFunFacts = (id) => {
     }
   };
 };
-export const submitRecommendation = (id, reason) => {
+export const submitRecommendation = (movieId, reason) => {
   return async (dispatch) => {
     await myRecMovie.post(
-      `/recommendations/${id}`,
+      `recommendations/${movieId}`,
       {
         reason,
       },
@@ -130,6 +130,17 @@ export const submitRecommendation = (id, reason) => {
     );
     swalSuccess("Success add Movie to Your Recommendation");
     dispatch(closeRecommendationModal());
+  };
+};
+
+export const deleteRecommendation = (movieId) => {
+  return async () => {
+    await myRecMovie.delete(`recommendations/${movieId}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+      },
+    });
+    swalSuccess("Success Delete Recommendation");
   };
 };
 
