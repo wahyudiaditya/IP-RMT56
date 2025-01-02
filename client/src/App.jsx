@@ -6,6 +6,7 @@ import Homepage from "./pages/home/Homepage";
 import AuthLayout from "./layouts/AuthLayout";
 import HomeLayout from "./layouts/HomeLayout";
 import MovieDetail from "./pages/movies/MovieDetail";
+import UserProfile from "./pages/user/UserProfile";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route element={<HomeLayout />}>
               <Route path="/" element={<Homepage />} />
               <Route path="/movie/:id" element={<MovieDetail />} />
+              <Route path="/profile" element={<UserProfile />} />
             </Route>
           </Route>
         </Routes>

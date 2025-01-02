@@ -26,6 +26,8 @@ export const login = (email, password) => {
       password,
     });
     localStorage.setItem("access_token", data.access_token);
+    const id = JSON.parse(atob(data.access_token.split(".")[1])).id;
+    localStorage.setItem("userId", id);
     swalSuccess("Login Successfully");
     dispatch(setLogin(data));
   };

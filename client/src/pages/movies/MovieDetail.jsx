@@ -24,11 +24,13 @@ import {
 } from "../../features/components/modalSlice";
 import { swalError } from "../../utils/swallAlert";
 import { FaHeart } from "react-icons/fa";
+import { fetchUser } from "../../features/user/userSlice";
 
 export default function MovieDetail() {
   const movie = useSelector((state) => state.movies.movie.movie);
   const cast = useSelector((state) => state.movies.movie.cast);
   const funFacts = useSelector((state) => state.movies.funFacts);
+  const user = useSelector((state) => state.user.data);
   const isOpenFunFactModal = useSelector(
     (state) => state.modal.modalFunFactsOpen
   );
@@ -39,7 +41,6 @@ export default function MovieDetail() {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  const recommendation = movie.Recomendations;
   const rating = movie.rating;
 
   const handleOpenFunFacts = () => {
@@ -52,7 +53,7 @@ export default function MovieDetail() {
     try {
       await dispatch(submitRecommendation(id, reason));
       setReason("");
-      dispatch(fetchMovie(id));
+      dispatch(fetchUser());
     } catch (error) {
       swalError(error.response.data.message);
     }
@@ -62,11 +63,15 @@ export default function MovieDetail() {
     e.preventDefault();
     try {
       await dispatch(deleteRecommendation(id));
-      dispatch(fetchMovie(id));
+      dispatch(fetchUser());
     } catch (error) {
       swalError(error.response.data.message);
     }
   };
+
+  useEffect(() => {
+    dispatch(fetchUser());
+  }, []);
 
   useEffect(() => {
     dispatch(fetchMovie(id));
@@ -76,6 +81,20 @@ export default function MovieDetail() {
   useEffect(() => {
     dispatch(isDetail(true));
   }, []);
+
+  let recommendation;
+
+  let lengthRec = user.Recomendations?.length;
+  if (lengthRec > 0) {
+    user.Recomendations.map((el) => {
+      if (el.MovieId == id) {
+        return (recommendation = true);
+      }
+      return (recommendation = false);
+    });
+  } else {
+    recommendation = false;
+  }
 
   return (
     <>
@@ -136,7 +155,7 @@ export default function MovieDetail() {
                 </div>
               </div>
               <div className="flex items-center">
-                {recommendation == 0 ? (
+                {!recommendation ? (
                   <>
                     <button
                       className="group relative flex items-center space-x-2 rounded-full p-2 cursor-pointer bg-sky-950"

@@ -4,6 +4,7 @@ import moviesReducer from "./features/movies/moviesSlice";
 import cardReducer from "./features/components/cardSlice";
 import modalReducer from "./features/components/modalSlice";
 import authFormReducer from "./features/auth/components/authFormSlice";
+import userReducer from "./features/user/userSlice";
 
 export default configureStore({
   reducer: {
@@ -12,5 +13,6 @@ export default configureStore({
     card: cardReducer,
     modal: modalReducer,
     authForm: authFormReducer,
+    user: userReducer,
   },
 });

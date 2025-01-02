@@ -1,5 +1,5 @@
 const { signToken } = require("../helpers/jwt");
-const { User, Preference, Recomendation } = require("../models");
+const { User, Preference, Movie, Recomendation } = require("../models");
 
 class UserController {
   static async addPreference(req, res, next) {
@@ -30,7 +30,7 @@ class UserController {
 
   static async updateProfile(req, res, next) {
     try {
-      const { name, profilePicture } = req.body;
+      const { name } = req.body;
       if (!name) {
         throw { name: "BadRequest", message: "Name Required" };
       }
@@ -50,10 +50,16 @@ class UserController {
   static async userInfo(req, res, next) {
     try {
       const user = await User.findByPk(req.user.id, {
-        include: {
-          model: Preference,
-          attributes: { exclude: ["createdAt", "updatedAt"] },
-        },
+        include: [
+          {
+            model: Preference,
+            attributes: { exclude: ["createdAt", "updatedAt"] },
+          },
+          {
+            model: Recomendation,
+            attributes: { exclude: ["createdAt", "updatedAt"] },
+          },
+        ],
         attributes: { exclude: ["password", "createdAt", "updatedAt"] },
       });
       res.json({ user });
@@ -70,7 +76,29 @@ class UserController {
         },
         attributes: { exclude: ["password", "googleId"] },
       });
+      if (!users) {
+        throw { name: "NotFound", message: "Users not found" };
+      }
       res.json({ users });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async userRecommendations(req, res, next) {
+    try {
+      const recomedations = await Recomendation.findAll({
+        include: {
+          model: Movie,
+        },
+        where: {
+          UserId: req.user.id,
+        },
+      });
+      if (!recomedations) {
+        throw { name: "NotFound", message: "Recommendations not found" };
+      }
+      res.json(recomedations);
     } catch (error) {
       next(error);
     }
