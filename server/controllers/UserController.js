@@ -30,7 +30,7 @@ class UserController {
 
   static async updateProfile(req, res, next) {
     try {
-      const { name } = req.body;
+      const { name, favoriteActors, favoriteGenres } = req.body;
       if (!name) {
         throw { name: "BadRequest", message: "Name Required" };
       }
@@ -40,8 +40,26 @@ class UserController {
       if (!user) {
         throw { name: "NotFound", message: "Invalid User" };
       }
-      await user.update(req.body);
-      res.json({ message: "Success update profile" });
+      await user.update({ name });
+      const preference = await Preference.findOne({
+        where: {
+          UserId: req.user.id,
+        },
+      });
+      if (!preference) {
+        await Preference.create({
+          favoriteActors,
+          favoriteGenres,
+          UserId: req.user.id,
+        });
+        res.json({ message: "Success update profile" });
+      } else {
+        await preference.update({
+          favoriteActors,
+          favoriteGenres,
+        });
+        res.json({ message: "Success update profile" });
+      }
     } catch (error) {
       next(error);
     }

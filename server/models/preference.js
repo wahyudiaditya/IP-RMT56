@@ -16,8 +16,30 @@ module.exports = (sequelize, DataTypes) => {
   }
   Preference.init(
     {
-      favoriteGenres: DataTypes.STRING,
-      favoriteActors: DataTypes.STRING,
+      favoriteGenres: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: "Favorite Genres cannot be empty",
+          },
+          notNull: {
+            msg: "Favorite Genres cannot be empty",
+          },
+        },
+      },
+      favoriteActors: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: "Favorite Actors cannot be empty",
+          },
+          notNull: {
+            msg: "Favorite Actors cannot be empty",
+          },
+        },
+      },
       UserId: DataTypes.INTEGER,
     },
     {

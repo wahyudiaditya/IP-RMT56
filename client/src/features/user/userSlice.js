@@ -31,4 +31,22 @@ export const fetchUser = () => {
   };
 };
 
+export const submitUpdateProfile = (name, actors, genres) => {
+  return async () => {
+    await myRecMovie.put(
+      "users/profiles",
+      {
+        name,
+        actors,
+        genres,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        },
+      }
+    );
+  };
+};
+
 export default userSlice.reducer;

@@ -16,6 +16,7 @@ export const moivesSlice = createSlice({
       cast: [],
     },
     funFacts: "",
+    loading: false,
   },
   reducers: {
     setMovies: (state, action) => {
@@ -30,10 +31,13 @@ export const moivesSlice = createSlice({
     setFunFacts: (state, action) => {
       state.funFacts = action.payload;
     },
+    setLoading: (state, action) => {
+      state.loading = action.payload;
+    },
   },
 });
 
-export const { setMovies, setTotalPages, setMovie, setFunFacts } =
+export const { setMovies, setTotalPages, setMovie, setFunFacts, setLoading } =
   moivesSlice.actions;
 
 export const fetchMovies = (page) => {
@@ -75,6 +79,7 @@ export const fetchMovie = (id) => {
         Swal.showLoading();
       },
     });
+    dispatch(setLoading(true));
     try {
       const { data } = await myRecMovie.get(`movies/${id}`, {
         headers: {
@@ -88,6 +93,7 @@ export const fetchMovie = (id) => {
       swalError(error.response.data.message);
     } finally {
       Swal.close();
+      dispatch(setLoading(false));
     }
   };
 };

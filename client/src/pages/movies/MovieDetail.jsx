@@ -5,6 +5,7 @@ import {
   deleteRecommendation,
   fetchFunFacts,
   fetchMovie,
+  setFunFacts,
   submitRecommendation,
 } from "../../features/movies/moviesSlice";
 import { useParams } from "react-router";
@@ -38,6 +39,7 @@ export default function MovieDetail() {
     (state) => state.modal.modalRecommendationOpen
   );
   const [reason, setReason] = useState("");
+  const isLoading = useSelector((state) => state.movies.loading);
   const dispatch = useDispatch();
   const { id } = useParams();
 
@@ -46,6 +48,7 @@ export default function MovieDetail() {
   const handleOpenFunFacts = () => {
     dispatch(openFunFactsModal());
     dispatch(fetchFunFacts(id));
+    dispatch(setFunFacts(""));
   };
 
   const handleSubmitRecommendation = async (e) => {
@@ -82,18 +85,14 @@ export default function MovieDetail() {
     dispatch(isDetail(true));
   }, []);
 
-  let recommendation;
+  let recommendation = false;
 
-  let lengthRec = user.Recomendations?.length;
-  if (lengthRec > 0) {
-    user.Recomendations.map((el) => {
-      if (el.MovieId == id) {
-        return (recommendation = true);
-      }
-      return (recommendation = false);
-    });
-  } else {
-    recommendation = false;
+  if (user.Recomendations && user.Recomendations.length > 0) {
+    recommendation = user.Recomendations.some((el) => el.MovieId == id);
+  }
+
+  if (isLoading) {
+    return <></>;
   }
 
   return (

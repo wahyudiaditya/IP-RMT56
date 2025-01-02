@@ -1,17 +1,42 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUser } from "../../features/user/userSlice";
+import { fetchUser, submitUpdateProfile } from "../../features/user/userSlice";
+import { fetchUserRecommendations } from "../../features/recommendations/recommendationsSlice";
+import Modal from "../../components/form/Modal";
+import { closeUpdateProfileModal } from "../../features/components/modalSlice";
+import { swalError } from "../../utils/swallAlert";
 
 export default function UserProfile() {
   const user = useSelector((state) => state.user.data);
+  const recommendations = useSelector(
+    (state) => state.recommendations.userRecommendations
+  );
+  const isOpenUpdateModal = useSelector(
+    (state) => state.modal.modalUpdateProfile
+  );
+  const [name, setName] = useState("");
+  const [actors, setActors] = useState("");
+  const [genres, setGenres] = useState("");
   const dispatch = useDispatch();
-  const preference = user.Preference;
+
+  const handleSubmitUpdate = async (e) => {
+    e.preventDefault();
+    try {
+      await dispatch(submitUpdateProfile(name, actors, genres));
+    } catch (error) {
+      swalError(error.response.data.message);
+    }
+  };
 
   useEffect(() => {
     dispatch(fetchUser());
   }, []);
 
-  console.log(user, "ini user");
+  useEffect(() => {
+    dispatch(fetchUserRecommendations());
+  }, []);
+
+  const preference = user.Preference;
 
   return (
     <>
@@ -43,7 +68,11 @@ export default function UserProfile() {
                   <span className="label" style={{ width: 144 }}>
                     Name{" "}
                   </span>
-                  <span className="ms-5">{user.name}</span>
+                  {user.name ? (
+                    <span className="ms-5">{user.name}</span>
+                  ) : (
+                    <span className="ms-5">-</span>
+                  )}
                 </div>
                 {preference ? (
                   <>
@@ -80,16 +109,51 @@ export default function UserProfile() {
                   <span className="label" style={{ width: 144 }}>
                     Recommendations{" "}
                   </span>
-                  <span className="ms-5">gender</span>
+                  <ul className="ms-5">
+                    {recommendations?.length == 0 ? (
+                      <span className="ms-5">-</span>
+                    ) : (
+                      recommendations.map((el, index) => (
+                        <li key={el.id}>
+                          {index + 1}. {el.Movie?.title}
+                        </li>
+                      ))
+                    )}
+                  </ul>
                 </div>
               </div>
               <div className="pt-4 flex justify-center gap-4">
                 <button className="bg-sky-500 px-2 py-1 rounded-md text-white">
                   Update Profile
                 </button>
-                <button className="bg-yellow-400 px-2 rounded-md">
-                  Update Recommendations
-                </button>
+                {/* {isOpenUpdateModal && (
+                  <Modal
+                    modalName="Update Profile"
+                    handleCloseModal={() => dispatch(closeUpdateProfileModal())}
+                    data={
+                      <div>
+                        <div className="flex justify-center w-full">
+                          <form onSubmit={handleSubmitUpdate}>
+                            <div>
+                              <label>Reason:</label>
+                            </div>
+                            <textarea
+                              placeholder="Tell me why you recommend this movie?"
+                              value={reason}
+                              onChange={(e) => setReason(e.target.value)}
+                              className="md:w-[400px] md:h-[200px] px-2 py-1 outline-none hover:outline-none border rounded-md"
+                            ></textarea>
+                            <div className="flex justify-center pt-2">
+                              <button className="border rounded-md bg-sky-950 text-yellow-400 px-4 py-1">
+                                Add Recommendation
+                              </button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    }
+                  />
+                )} */}
               </div>
             </div>
           </div>
