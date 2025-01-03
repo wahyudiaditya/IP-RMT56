@@ -7,7 +7,8 @@ import AuthLayout from "./layouts/AuthLayout";
 import HomeLayout from "./layouts/HomeLayout";
 import MovieDetail from "./pages/movies/MovieDetail";
 import UserProfile from "./pages/user/UserProfile";
-import UserRecommendations from "./pages/recommendations/UserRecommendations";
+// import UserRecommendations from "./pages/recommendations/UserRecommendations";
+import Test from "./pages/recommendations/test";
 
 function App() {
   return (
@@ -23,10 +24,7 @@ function App() {
               <Route path="/" element={<Homepage />} />
               <Route path="/movie/:id" element={<MovieDetail />} />
               <Route path="/profile" element={<UserProfile />} />
-              <Route
-                path="/recommendations"
-                element={<UserRecommendations />}
-              />
+              <Route path="/recommendations" element={<Test />} />
             </Route>
           </Route>
         </Routes>

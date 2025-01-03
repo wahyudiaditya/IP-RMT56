@@ -14,23 +14,6 @@ const geminiFunFact = async (movie) => {
   }
 };
 
-const geminiRecomendation = async (likedGendres, likedActors) => {
-  try {
-    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-
-    const prompt = `beri aku rekomendasi film, yang bersangkutan dengan genre dan aktor ${
-      (likedGendres, likedActors)
-    } tidak masalah walaupun mereka tidak pernah bermain film bersama, tampilkan saja film-film yang menurut kamu cocok untuk aktor dan juga genre yang aku sampaikan`;
-
-    const result = await model.generateContent(prompt);
-    return result.response.text();
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 module.exports = {
   geminiFunFact,
-  geminiRecomendation,
 };

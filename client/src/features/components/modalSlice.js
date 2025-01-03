@@ -6,6 +6,7 @@ export const modalSlice = createSlice({
     modalFunFactsOpen: false,
     modalRecommendationOpen: false,
     modalUpdateProfile: false,
+    modalRecommnedAI: false,
   },
   reducers: {
     openFunFactsModal: (state) => {
@@ -26,6 +27,12 @@ export const modalSlice = createSlice({
     closeUpdateProfileModal: (state) => {
       state.modalUpdateProfile = false;
     },
+    openRecommendationAi: (state) => {
+      state.modalRecommnedAI = true;
+    },
+    closeRecommendationAi: (state) => {
+      state.modalRecommnedAI = false;
+    },
   },
 });
 
@@ -36,6 +43,8 @@ export const {
   closeRecommendationModal,
   openUpdateProfileModal,
   closeUpdateProfileModal,
+  openRecommendationAi,
+  closeRecommendationAi,
 } = modalSlice.actions;
 
 export default modalSlice.reducer;

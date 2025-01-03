@@ -64,9 +64,13 @@ class UserController {
       const users = await User.findAll({
         include: {
           model: Recomendation,
+          include: {
+            model: Movie, // Menambahkan model Movies di dalam Recomendation
+          },
         },
         attributes: { exclude: ["password", "googleId"] },
       });
+
       if (!users) {
         throw { name: "NotFound", message: "Users not found" };
       }

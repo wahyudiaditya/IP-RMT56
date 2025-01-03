@@ -134,37 +134,6 @@ class MovieController {
       next(error);
     }
   }
-
-  static async geminiRec(req, res, next) {
-    try {
-      // const preference = await Preference.findOne({
-      //   where: {
-      //     UserId: req.user.id,
-      //   },
-      // });
-
-      // if (!preference) {
-      //   throw {
-      //     name: "NotFound",
-      //     message: "User has not completed preferences",
-      //   };
-      // }
-
-      let actors = "christ hamsworth,robert downy jr";
-      let genres = "action,adventure";
-
-      let aiRec = await geminiRecomendation(
-        // preference.favoriteGenres,
-        // preference.favoriteActors
-        genres,
-        actors
-      );
-
-      res.json(aiRec);
-    } catch (error) {
-      next(error);
-    }
-  }
 }
 
 module.exports = MovieController;

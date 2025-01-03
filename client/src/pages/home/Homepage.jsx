@@ -7,12 +7,16 @@ import { fetchMovies } from "../../features/movies/moviesSlice";
 import { NavLink } from "react-router";
 import { isDetail } from "../../features/components/cardSlice";
 import { getYear } from "../../utils/formatDate";
+import Modal from "../../components/form/Modal";
 
 export default function Homepage() {
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState("");
   const movies = useSelector((state) => state.movies.list.data);
   const totalPages = useSelector((state) => state.movies.list.totalPages);
+  const isOpenRecommedationsAIOpen = useSelector(
+    (state) => state.modal.modalRecommnedAI
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -48,7 +52,7 @@ export default function Homepage() {
           </div>
         </div>
       </div>
-      <div className="md:container lg:mx-auto md:w-[1200px] text-black mt-10 ">
+      <div className="md:container xl:mx-auto lg:mx-auto md:w-[1200px] text-black mt-10 ">
         <div className="md:flex md:items-center">
           <p className="md:text-2xl font-bold border-b-4 border-green-500">
             Popular Movies
@@ -74,6 +78,7 @@ export default function Homepage() {
 
           <div className="border rounded-md bg-sky-950 md:px-4 md:py-2 text-yellow-300">
             <button>Recomendation By AI</button>
+            {isOpenRecommedationsAIOpen && <Modal />}
           </div>
         </div>
         <div className="mt-10 max-w-[1000px] mx-auto ">
