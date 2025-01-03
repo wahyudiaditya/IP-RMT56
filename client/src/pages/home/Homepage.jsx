@@ -7,16 +7,13 @@ import { fetchMovies } from "../../features/movies/moviesSlice";
 import { NavLink } from "react-router";
 import { isDetail } from "../../features/components/cardSlice";
 import { getYear } from "../../utils/formatDate";
-import Modal from "../../components/form/Modal";
 
 export default function Homepage() {
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState("");
   const movies = useSelector((state) => state.movies.list.data);
   const totalPages = useSelector((state) => state.movies.list.totalPages);
-  const isOpenRecommedationsAIOpen = useSelector(
-    (state) => state.modal.modalRecommnedAI
-  );
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -76,9 +73,8 @@ export default function Homepage() {
             />
           </div>
 
-          <div className="border rounded-md bg-sky-950 md:px-4 md:py-2 text-yellow-300">
-            <button>Recomendation By AI</button>
-            {isOpenRecommedationsAIOpen && <Modal />}
+          <div className=" border-green-500 border-b-4 font-bold text-xl">
+            <p>Recomendation For All Users</p>
           </div>
         </div>
         <div className="mt-10 max-w-[1000px] mx-auto ">

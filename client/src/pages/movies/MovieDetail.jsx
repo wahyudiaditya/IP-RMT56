@@ -23,6 +23,7 @@ import {
   openFunFactsModal,
   openRecommendationModal,
 } from "../../features/components/modalSlice";
+import Swal from "sweetalert2";
 import { swalError } from "../../utils/swallAlert";
 import { FaHeart } from "react-icons/fa";
 import { fetchUser } from "../../features/user/userSlice";
@@ -53,22 +54,40 @@ export default function MovieDetail() {
 
   const handleSubmitRecommendation = async (e) => {
     e.preventDefault();
+    Swal.fire({
+      title: "Adding Movie to Your Recommendations",
+      html: "Please wait ...",
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
     try {
       await dispatch(submitRecommendation(id, reason));
       setReason("");
       dispatch(fetchUser());
     } catch (error) {
       swalError(error.response.data.message);
+    } finally {
+      Swal.close();
     }
   };
 
   const handleDeleteRecommendation = async (e) => {
     e.preventDefault();
+    Swal.fire({
+      title: "Remove Movie from Your Recommendations",
+      html: "Please wait ...",
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
     try {
       await dispatch(deleteRecommendation(id));
       dispatch(fetchUser());
     } catch (error) {
       swalError(error.response.data.message);
+    } finally {
+      Swal.close();
     }
   };
 

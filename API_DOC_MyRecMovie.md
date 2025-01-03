@@ -11,7 +11,6 @@ List of available endpoints:
 - `PUT /users/profiles`
 - `GET /users/recommendations`
 - `GET /movies/`
-- `GET /movies/ai`
 - `GET /movies/:id`
 - `GET /movies/funFacts/:id`
 - `POST /recommendations/:movieId`
@@ -365,23 +364,7 @@ _Response (200 - OK)_
 
 &nbsp;
 
-## 8. GET /movies/ai
-
-Description:
-
-- Get recommendation by gemini ai
-
-Request:
-
-- header:
-
-```json
-{ "Authorization": "Bearer <your access token>" }
-```
-
-&nbsp;
-
-## 9. GET /movies/:id
+## 8. GET /movies/:id
 
 Description:
 
@@ -457,7 +440,7 @@ _Response (200 - OK)_
 
 &nbsp;
 
-## 10. GET /movies/funFacts/:id
+## 9. GET /movies/funFacts/:id
 
 - Get funfacts by gemini ai
 
@@ -493,7 +476,7 @@ _Response (404 - Not Found)_
 
 &nbsp;
 
-## 11. POST /recommendations/:movieId
+## 10. POST /recommendations/:movieId
 
 Description:
 
@@ -541,7 +524,7 @@ _Response (400 - Bad Request)_
 
 &nbsp;
 
-## 12. DELETE /recommendations/:movieId
+## 11. DELETE /recommendations/:movieId
 
 Description:
 
@@ -583,7 +566,7 @@ _Response (404 - Not Found)_
 
 &nbsp;
 
-## 13. GET /recommendations/users
+## 12. GET /recommendations/users
 
 Description:
 

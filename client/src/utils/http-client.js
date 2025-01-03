@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export const myRecMovie = axios.create({
-  baseURL: "http://localhost:3000/",
+  baseURL: "https://rmt-56.wahyudiaditya.com/",
 });

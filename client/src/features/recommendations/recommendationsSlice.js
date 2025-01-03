@@ -44,7 +44,6 @@ export const fetchUsersRecommendations = () => {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
       });
-      // console.log(response, "ini apaan ?");
       dispatch(setUsersRecommendations(data.users));
     } catch (error) {
       swalError(error.response.data.message);
