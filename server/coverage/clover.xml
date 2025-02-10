@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1735845639010" clover="3.2.0">
-  <project timestamp="1735845639010" name="All files">
-    <metrics statements="313" coveredstatements="180" conditionals="66" coveredconditionals="26" methods="39" coveredmethods="22" elements="418" coveredelements="228" complexity="0" loc="313" ncloc="313" packages="6" files="21" classes="21"/>
+<coverage generated="1735879359272" clover="3.2.0">
+  <project timestamp="1735879359272" name="All files">
+    <metrics statements="298" coveredstatements="178" conditionals="66" coveredconditionals="26" methods="37" coveredmethods="22" elements="401" coveredelements="226" complexity="0" loc="298" ncloc="298" packages="6" files="21" classes="21"/>
     <package name="server">
       <metrics statements="13" coveredstatements="13" conditionals="2" coveredconditionals="1" methods="0" coveredmethods="0"/>
       <file name="app.js" path="C:\Users\wahyu\Music\Coding\Hacktiv8\Phase 2\Week 3\I-Project\IP-RMT56\server\app.js">
@@ -22,7 +22,7 @@
       </file>
     </package>
     <package name="server.controllers">
-      <metrics statements="146" coveredstatements="44" conditionals="36" coveredconditionals="10" methods="17" coveredmethods="4"/>
+      <metrics statements="140" coveredstatements="44" conditionals="36" coveredconditionals="10" methods="16" coveredmethods="4"/>
       <file name="AuthController.js" path="C:\Users\wahyu\Music\Coding\Hacktiv8\Phase 2\Week 3\I-Project\IP-RMT56\server\controllers\AuthController.js">
         <metrics statements="40" coveredstatements="26" conditionals="14" coveredconditionals="9" methods="3" coveredmethods="2"/>
         <line num="1" count="2" type="stmt"/>
@@ -67,7 +67,7 @@
         <line num="95" count="2" type="stmt"/>
       </file>
       <file name="MovieController.js" path="C:\Users\wahyu\Music\Coding\Hacktiv8\Phase 2\Week 3\I-Project\IP-RMT56\server\controllers\MovieController.js">
-        <metrics statements="53" coveredstatements="6" conditionals="8" coveredconditionals="0" methods="8" coveredmethods="0"/>
+        <metrics statements="47" coveredstatements="6" conditionals="8" coveredconditionals="0" methods="7" coveredmethods="0"/>
         <line num="1" count="2" type="stmt"/>
         <line num="5" count="2" type="stmt"/>
         <line num="6" count="2" type="stmt"/>
@@ -114,13 +114,7 @@
         <line num="130" count="0" type="stmt"/>
         <line num="132" count="0" type="stmt"/>
         <line num="134" count="0" type="stmt"/>
-        <line num="139" count="0" type="stmt"/>
-        <line num="153" count="0" type="stmt"/>
-        <line num="154" count="0" type="stmt"/>
-        <line num="156" count="0" type="stmt"/>
-        <line num="163" count="0" type="stmt"/>
-        <line num="165" count="0" type="stmt"/>
-        <line num="170" count="2" type="stmt"/>
+        <line num="139" count="2" type="stmt"/>
       </file>
       <file name="RecomendationController.js" path="C:\Users\wahyu\Music\Coding\Hacktiv8\Phase 2\Week 3\I-Project\IP-RMT56\server\controllers\RecomendationController.js">
         <metrics statements="20" coveredstatements="3" conditionals="4" coveredconditionals="0" methods="2" coveredmethods="0"/>
@@ -169,21 +163,21 @@
         <line num="58" count="0" type="stmt"/>
         <line num="63" count="0" type="stmt"/>
         <line num="64" count="0" type="stmt"/>
-        <line num="70" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="71" count="0" type="stmt"/>
-        <line num="73" count="0" type="stmt"/>
+        <line num="74" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="75" count="0" type="stmt"/>
-        <line num="80" count="1" type="stmt"/>
-        <line num="81" count="1" type="stmt"/>
-        <line num="89" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="90" count="0" type="stmt"/>
-        <line num="92" count="1" type="stmt"/>
+        <line num="77" count="0" type="stmt"/>
+        <line num="79" count="0" type="stmt"/>
+        <line num="84" count="1" type="stmt"/>
+        <line num="85" count="1" type="stmt"/>
+        <line num="93" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="94" count="0" type="stmt"/>
-        <line num="99" count="2" type="stmt"/>
+        <line num="96" count="1" type="stmt"/>
+        <line num="98" count="0" type="stmt"/>
+        <line num="103" count="2" type="stmt"/>
       </file>
     </package>
     <package name="server.helpers">
-      <metrics statements="40" coveredstatements="18" conditionals="4" coveredconditionals="0" methods="8" coveredmethods="4"/>
+      <metrics statements="32" coveredstatements="17" conditionals="4" coveredconditionals="0" methods="7" coveredmethods="4"/>
       <file name="bcryptjs.js" path="C:\Users\wahyu\Music\Coding\Hacktiv8\Phase 2\Week 3\I-Project\IP-RMT56\server\helpers\bcryptjs.js">
         <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="1" count="2" type="stmt"/>
@@ -194,7 +188,7 @@
         <line num="11" count="2" type="stmt"/>
       </file>
       <file name="gemini.js" path="C:\Users\wahyu\Music\Coding\Hacktiv8\Phase 2\Week 3\I-Project\IP-RMT56\server\helpers\gemini.js">
-        <metrics statements="18" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <metrics statements="10" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="1" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
         <line num="4" count="0" type="stmt"/>
@@ -205,14 +199,6 @@
         <line num="11" count="0" type="stmt"/>
         <line num="13" count="0" type="stmt"/>
         <line num="17" count="2" type="stmt"/>
-        <line num="18" count="0" type="stmt"/>
-        <line num="19" count="0" type="stmt"/>
-        <line num="20" count="0" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
-        <line num="26" count="0" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
-        <line num="29" count="0" type="stmt"/>
-        <line num="33" count="2" type="stmt"/>
       </file>
       <file name="jwt.js" path="C:\Users\wahyu\Music\Coding\Hacktiv8\Phase 2\Week 3\I-Project\IP-RMT56\server\helpers\jwt.js">
         <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
@@ -341,7 +327,7 @@
       </file>
     </package>
     <package name="server.routes">
-      <metrics statements="38" coveredstatements="38" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <metrics statements="37" coveredstatements="37" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="auth.js" path="C:\Users\wahyu\Music\Coding\Hacktiv8\Phase 2\Week 3\I-Project\IP-RMT56\server\routes\auth.js">
         <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="2" type="stmt"/>
@@ -367,14 +353,13 @@
         <line num="14" count="2" type="stmt"/>
       </file>
       <file name="movies.js" path="C:\Users\wahyu\Music\Coding\Hacktiv8\Phase 2\Week 3\I-Project\IP-RMT56\server\routes\movies.js">
-        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
         <line num="5" count="2" type="stmt"/>
         <line num="6" count="2" type="stmt"/>
         <line num="7" count="2" type="stmt"/>
-        <line num="8" count="2" type="stmt"/>
-        <line num="10" count="2" type="stmt"/>
+        <line num="9" count="2" type="stmt"/>
       </file>
       <file name="recommendations.js" path="C:\Users\wahyu\Music\Coding\Hacktiv8\Phase 2\Week 3\I-Project\IP-RMT56\server\routes\recommendations.js">
         <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
